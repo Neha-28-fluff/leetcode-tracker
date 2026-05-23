@@ -1,0 +1,59 @@
+# Python cache and bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment folders
+env/
+venv/
+.venv/
+ENV/
+.ENV/
+
+# Editor and IDE config files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Mac and Windows OS junk
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints (if any notebooks are used)
+.ipynb_checkpoints/
+
+# Log files
+*.log
+
+# Streamlit secrets
+frontend/.streamlit/secrets.toml
+
+# Environment variables/settings
+.env
+.env.*
+
+# SQLite database files (if you do not want to track your real data)
+*.sqlite3
+*.db
+
+# Coverage/testing/cache
+htmlcov/
+.coverage
+.cache
+pytest_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Build/dist
+build/
+dist/
+*.egg-info/
+
+# Data/output folders (delete/add as needed)
+data/
+output/
+
+# Screenshots or demo assets (if generated at runtime or are local-only)
+screenshots/
