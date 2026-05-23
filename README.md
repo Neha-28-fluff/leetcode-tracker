@@ -1,2 +1,105 @@
-# Leetcode Tracker
-A self-hosted LeetCode practice tracker built with Python, FastAPI, and Streamlit. Syncs your solved problems via LeetCode's GraphQL API, stores them in SQLite, and lets you attach personal notes and a confidence score to each question. Re-syncing never overwrites your data — only new solves are added. Includes CSV export for backups.
+# LeetCode Tracker
+
+![screenshot or demo gif here](screenshots/demo.gif)
+
+A web app to automatically sync your solved LeetCode questions, let you add personal notes and confidence ratings, and view/edit your progress—all in one place.
+
+## 🚀 Features
+
+- 🔄 **Sync solved problems** from LeetCode by username
+- 📝 **Add/edit notes** on each problem
+- ⭐️ **Set your confidence** per problem for easy revision
+- 🔍 **Search/filter** by title or status
+- 🔗 **Click problem title** → jump directly to actual LeetCode page
+
+## 🛠️ Tech Stack
+
+- **Python 3.10+**
+- [FastAPI](https://fastapi.tiangolo.com/) (backend/API)
+- [SQLite](https://docs.python.org/3/library/sqlite3.html) (storage)
+- [Streamlit](https://streamlit.io/) (frontend UI)
+- [requests](https://docs.python-requests.org/) (for LeetCode syncing)
+- Docker for deployment
+
+## 📸 Demo
+
+![tracker UI screenshot](screenshots/screenshot.png)
+
+## ⚡️ Quick Start
+
+### 1. Clone the repo
+```bash
+git clone [https://github.com/yourusername/leetcode-tracker.git](https://github.com/Neha-28-fluff/leetcode-tracker.git)
+cd leetcode-tracker
+```
+
+### 2. Install dependencies (ideally in a virtualenv)
+```bash
+pip install -r backend/requirements.txt
+pip install -r frontend/requirements.txt
+```
+
+### 3. Set up environment (Optional: Create `.env` if needed)
+```bash
+cp backend/.env.example backend/.env
+# Add your config/secrets as needed
+```
+
+### 4. Run the backend API (FastAPI)
+```bash
+cd backend
+uvicorn main:app --reload
+```
+By default, it starts at `http://localhost:8000`
+
+### 5. Run the frontend UI (Streamlit)
+```bash
+cd frontend
+streamlit run app.py
+```
+By default, opens in your browser.
+
+## 💡 Usage
+
+- Enter your LeetCode username and click **Sync**
+- Browse/search problems, edit notes/confidence as you solve or review
+- Click a problem title to jump to LeetCode for that problem
+- Use the app regularly to track progress and prep smart!
+
+## 🏗️ Project Structure
+
+```
+leetcode-tracker/
+├── backend/
+│   ├── main.py
+│   ├── database.py
+│   ├── leetcode_sync.py
+│   └── ...
+├── frontend/
+│   ├── app.py
+│   └── ...
+├── data/
+│   └── sample_db.sqlite3
+├── scripts/
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+## 📝 Future Goals / Ideas
+
+- 🚩 Streak and tag support
+- 📊 Visualize progress (charts, pie graphs)
+- ✅ CSV/JSON export of your log
+- 🛡️ Authentication/own hosting
+- 📱 Mobile app or PWA
+
+---
+
+## 💬 License
+
+MIT (or your favorite license).
+
+---
+
+### Need help? [Open an issue](https://github.com/Neha-28-fluff/leetcode-tracker/issues) or ping me on LinkedIn!
