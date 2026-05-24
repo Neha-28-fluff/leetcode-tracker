@@ -79,12 +79,39 @@ leetcode-tracker/
 │   ├── app.py
 │   └── ...
 ├── data/
-│   └── sample_db.sqlite3
+│   └── leetcode.db
 ├── scripts/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
+
+---
+## Database Table Design
+## `problems` Table
+
+| Field      | Type     | Details/Constraints                   |
+|------------|----------|---------------------------------------|
+| id         | INTEGER  | Primary Key, auto-increment           |
+| title      | TEXT     | Not null, LeetCode problem title      |
+| slug       | TEXT     | Not null, unique, for direct linking  |
+| pattern    | TEXT     | (Optional) e.g. "array", "dp"         |
+| notes      | TEXT     | (Optional) revision notes             |
+| confidence | INTEGER  | [0–5], revision/proficiency score     |
+
+### Conventions
+- `slug` uses LeetCode string for direct URL: `https://leetcode.com/problems/{slug}/`
+- Confidence: 0 (no confidence) to 5 (mastered)
+
+### Design Justification
+- Unique slug prevents duplicates from API sync
+- Simple scale for fast update and UI filtering
+- `pattern` is future-proofing for tags
+
+### Questions for the Future
+- Should I track date solved? Multiple notes? Multiple users?
+
+---
 
 ## 📝 Future Goals / Ideas
 
