@@ -59,12 +59,19 @@ streamlit run app.py
 ```
 By default, opens in your browser.
 
-## 💡 Usage
+## 🚦 LeetCode Tracker Data Limitations & Usage
 
+### 🔗 How This Tracker Works
 - Enter your LeetCode username and click **Sync**
 - Browse/search problems, edit notes/confidence as you solve or review
 - Click a problem title to jump to LeetCode for that problem
 - Use the app regularly to track progress and prep smart!
+
+### 🚨 API Limitation: Only Last 20 Solved Problems
+- **Due to LeetCode public API restrictions, only the 20 most recent accepted submissions are available for syncing for any user.**
+- This is a LeetCode global limit—**no app or script can fetch more than your last 20 via their public API.**
+- If you solve additional problems, re-run the sync to track your newest ones.
+- Previously tracked problems are not overwritten—you can keep/add notes/confidence for your full history (as long as you sync regularly).
 
 ## 🏗️ Project Structure
 
