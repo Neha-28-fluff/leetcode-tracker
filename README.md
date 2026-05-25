@@ -1,77 +1,32 @@
 # LeetCode Tracker
 
-![screenshot or demo gif here](screenshots/demo.gif)
+[![LeetCode Tracker Webapp](https://img.shields.io/badge/Try%20it%20Live-Streamlit%20App-brightgreen)](https://leetcode-review-tracker.streamlit.app/)
 
-A web app to automatically sync your solved LeetCode questions, let you add personal notes and confidence ratings, and view/edit your progress—all in one place.
+> **Try the app here**:  
+> 🌐 **[https://leetcode-review-tracker.streamlit.app/](https://leetcode-review-tracker.streamlit.app/)**
+
+---
 
 ## 🚀 Features
 
-- 🔄 **Sync solved problems** from LeetCode by username
-- 📝 **Add/edit notes** on each problem
-- ⭐️ **Set your confidence** per problem for easy revision
-- 🔍 **Search/filter** by title or status
-- 🔗 **Click problem title** → jump directly to actual LeetCode page
+- 🔄 **Auto-sync solved LeetCode problems** by username (uses LeetCode’s GraphQL)
+- 📝 **Add/edit your own notes & patterns** for each problem
+- ⭐️ **Set and filter your confidence level**, to plan and focus your revisions
+- 🔍 **Powerful filter/search** by title, pattern, or confidence
+- 🔗 **Click any problem title** to open the official LeetCode page
 
-## 🛠️ Tech Stack
+---
 
-- **Python 3.10+**
-- [FastAPI](https://fastapi.tiangolo.com/) (backend/API)
-- [SQLite](https://docs.python.org/3/library/sqlite3.html) (storage)
-- [Streamlit](https://streamlit.io/) (frontend UI)
-- [requests](https://docs.python-requests.org/) (for LeetCode syncing)
-- Docker for deployment
+## 🚦 LeetCode API Limitation
 
-## 📸 Demo
+> **Important:**  
+> Due to LeetCode's official API restrictions (even via GraphQL), *only your 20 most recent solved problems* are available for syncing.
+>
+> - This is an official LeetCode limitation—no tool can fetch more than 20 via public API.
+> - When you solve more, re-sync to track new solutions.
+> - Your notes and confidence for previously tracked problems are always kept unless deleted by you.
 
-![tracker UI screenshot](screenshots/screenshot.png)
-
-## ⚡️ Quick Start
-
-### 1. Clone the repo
-```bash
-git clone [https://github.com/yourusername/leetcode-tracker.git](https://github.com/Neha-28-fluff/leetcode-tracker.git)
-cd leetcode-tracker
-```
-
-### 2. Install dependencies (ideally in a virtualenv)
-```bash
-pip install -r backend/requirements.txt
-pip install -r frontend/requirements.txt
-```
-
-### 3. Set up environment (Optional: Create `.env` if needed)
-```bash
-cp backend/.env.example backend/.env
-# Add your config/secrets as needed
-```
-
-### 4. Run the backend API (FastAPI)
-```bash
-cd backend
-uvicorn main:app --reload
-```
-By default, it starts at `http://localhost:8000`
-
-### 5. Run the frontend UI (Streamlit)
-```bash
-cd frontend
-streamlit run app.py
-```
-By default, opens in your browser.
-
-## 🚦 LeetCode Tracker Data Limitations & Usage
-
-### 🔗 How This Tracker Works
-- Enter your LeetCode username and click **Sync**
-- Browse/search problems, edit notes/confidence as you solve or review
-- Click a problem title to jump to LeetCode for that problem
-- Use the app regularly to track progress and prep smart!
-
-### 🚨 API Limitation: Only Last 20 Solved Problems
-- **Due to LeetCode public API restrictions, only the 20 most recent accepted submissions are available for syncing for any user.**
-- This is a LeetCode global limit—**no app or script can fetch more than your last 20 via their public API.**
-- If you solve additional problems, re-run the sync to track your newest ones.
-- Previously tracked problems are not overwritten—you can keep/add notes/confidence for your full history (as long as you sync regularly).
+---
 
 ## 🏗️ Project Structure
 
@@ -87,53 +42,66 @@ leetcode-tracker/
 │   └── ...
 ├── data/
 │   └── leetcode.db
-├── scripts/
-├── requirements.txt
 ├── .gitignore
+├── learning-process.excalidraw
 └── README.md
 ```
 
+- **Backend:** FastAPI, deployed on [Render](https://render.com)
+- **Frontend:** Streamlit, deployed on [Streamlit Community Cloud](https://streamlit.io/cloud)
+- **Sync engine:** Uses LeetCode’s GraphQL API under the hood
+
 ---
-## Database Table Design
-## `problems` Table
+
+## 🗄️ Database Table Design
+
+### `problems` Table
 
 | Field      | Type     | Details/Constraints                   |
 |------------|----------|---------------------------------------|
 | id         | INTEGER  | Primary Key, auto-increment           |
-| title      | TEXT     | Not null, LeetCode problem title      |
-| slug       | TEXT     | Not null, unique, for direct linking  |
+| title      | TEXT     | LeetCode problem title                |
+| slug       | TEXT     | Unique, for direct linking            |
 | pattern    | TEXT     | (Optional) e.g. "array", "dp"         |
-| notes      | TEXT     | (Optional) revision notes             |
-| confidence | INTEGER  | [0–5], revision/proficiency score     |
+| notes      | TEXT     | (Optional) your revision notes        |
+| confidence | INTEGER  | [0–5]: revision/proficiency score     |
+| username   | TEXT     | For multi-user support                |
 
-### Conventions
-- `slug` uses LeetCode string for direct URL: `https://leetcode.com/problems/{slug}/`
-- Confidence: 0 (no confidence) to 5 (mastered)
-
-### Design Justification
-- Unique slug prevents duplicates from API sync
-- Simple scale for fast update and UI filtering
-- `pattern` is future-proofing for tags
-
-### Questions for the Future
-- Should I track date solved? Multiple notes? Multiple users?
+- **Slug:** used for problem URLs: `https://leetcode.com/problems/{slug}/`
+- **Confidence:** from 0 (no confidence) to 5 (mastered)
 
 ---
 
-## 📝 Future Goals / Ideas
+## 📝 My Learnings & Journey
 
-- 🚩 Streak and tag support
-- 📊 Visualize progress (charts, pie graphs)
-- ✅ CSV/JSON export of your log
-- 🛡️ Authentication/own hosting
-- 📱 Mobile app or PWA
+This project was a fantastic learning experience in **full-stack development, integration with web APIs, and cloud deployment**. My key learnings:
+
+- 🟦 **FastAPI + Cloud:** Built and deployed a secure backend API on Render, handling authentication, CORS, and clean API design.
+- 🟩 **Streamlit for UI:** Leveraged Streamlit for a responsive Python-based frontend, including session state, editing in tables, and dynamic filtering.
+- 🟨 **LeetCode GraphQL:** Learned to use the (unofficial) LeetCode GraphQL API for fetching problem data, and robust error handling for public API quirks.
+- 🟧 **Integration:** Making sure frontend and backend work together—across `localhost` and then “live” on two platforms—was a rewarding debugging + deployment challenge.
+- 🟪 **Database design:** Extended SQLite to support multi-user data and real-world persistence in the cloud, plus safely storing user notes and ratings.
+- 🟫 **DevOps:** Covered everything from environment variables to troubleshooting deployment errors (like database folder creation and port binding).
+
+> **Biggest challenge:** Adapting to LeetCode’s API rate/data limits, and ensuring a smooth user experience
+> despite those constraints.
+
+> **Most fun:** Seeing my LeetCode history, notes, and confidence levels all in one connected, cloud-accessible dashboard!
 
 ---
 
-## 💬 License
+## 🌐 Web App
 
-MIT (or your favorite license).
+👉 **Try it live:** [https://leetcode-review-tracker.streamlit.app/](https://leetcode-review-tracker.streamlit.app/)
 
 ---
 
-### Need help? [Open an issue](https://github.com/Neha-28-fluff/leetcode-tracker/issues) or ping me on LinkedIn!
+## 💬 Questions/Feedback
+
+Find a bug or have a suggestion?  
+[Open an issue on GitHub](https://github.com/Neha-28-fluff/leetcode-tracker/issues)  
+or connect with me [on LinkedIn](https://www.linkedin.com/in/neha-biswas-b15636322)!
+
+---
+
+**Happy Trackin ^^!**
