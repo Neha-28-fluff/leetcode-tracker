@@ -1,7 +1,7 @@
 import requests
 from database import add_problem, problem_exists, initialize_db
 
-def get_recent_ac_submissions(username, limit=50):
+def get_recent_ac_submissions(username, limit=20):
     url = "https://leetcode.com/graphql/"
     query = '''
     query recentAcSubmissions($username: String!, $limit: Int!) {
@@ -35,18 +35,18 @@ def get_recent_ac_submissions(username, limit=50):
         print("Exception while contacting LeetCode API:", e)
         return []
 
-def sync_user_problems(username, limit=20):
-    problems = get_recent_ac_submissions(username, limit)
+def sync_user_problems(local_username, leetcode_username, limit=20):
+    problems = get_recent_ac_submissions(leetcode_username, limit)
     if not problems:
         print("Nothing to sync (user not found or API error).")
         return
-    print(f"Fetched {len(problems)} recent submissions for {username}.")
-
+    print(f"Fetched {len(problems)} recent submissions for {leetcode_username}.")
     added = 0
     for p in problems:
         slug = p['titleSlug']
-        if not problem_exists(slug):
+        if not problem_exists(local_username, slug):
             did_add = add_problem(
+                local_username,
                 title=p['title'],
                 slug=slug,
                 problem_id=p['id'],
@@ -61,6 +61,3 @@ def sync_user_problems(username, limit=20):
 
 if __name__ == "__main__":
     initialize_db()  # Create table if doesn't exist
-    username = input("Enter LeetCode username: ").strip()
-    limit = 20
-    sync_user_problems(username, limit)

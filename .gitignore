@@ -1,59 +1,33 @@
-# Python cache and bytecode files
+# Byte-compiled / virtual environment files
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*.so
 *.pyd
+*.pyo
 
-# Virtual environment folders
+# Virtual environments
 env/
-venv/
 .venv/
-ENV/
-.ENV/
+venv/
 
-# Editor and IDE config files
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
+# Environment variable & secrets files
+.env
+*.env
 
-# Mac and Windows OS junk
+# OS/Editor specific
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
 
-# Jupyter Notebook checkpoints (if any notebooks are used)
-.ipynb_checkpoints/
-
-# Log files
-*.log
-
-# Streamlit secrets
-frontend/.streamlit/secrets.toml
-
-# Environment variables/settings
-.env
-.env.*
-
-# SQLite database files (if you do not want to track your real data)
-*.sqlite3
+# SQLite and other DBs (if you want to ignore the real data, recommended for most cases)
 *.db
+*.sqlite3
+*.db-journal
+data/leetcode.db
 
-# Coverage/testing/cache
-htmlcov/
-.coverage
-.cache
-pytest_cache/
-.mypy_cache/
-.pytest_cache/
+# Streamlit cache
+.streamlit/
 
-# Build/dist
-build/
-dist/
-*.egg-info/
-
-# Data/output folders (delete/add as needed)
-data/
-output/
-
-# Screenshots or demo assets (if generated at runtime or are local-only)
-screenshots/
+# Deployment/platform-specific
+# (Render, Vercel, etc - these usually don't need to store anything extra)
