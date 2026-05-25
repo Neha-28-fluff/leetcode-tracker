@@ -34,7 +34,7 @@ def problem_exists(slug):
     conn.close()
     return exists
 
-def add_problem(title, slug, problem_id=None, timestamp=None, notes='', confidence=0, pattern=None):
+def add_problem(title, slug, problem_id=None, timestamp=None, notes='', confidence=0, pattern=''):
     if confidence < 0 or confidence > 5:
         print(f"Error: Confidence value {confidence} is out of range (0-5).")
         return
@@ -60,14 +60,14 @@ def get_all_problems():
     conn.close()
     return rows
 
-def update_problem_confidence(slug, notes, confidence):
+def update_problem_confidence(slug, pattern,notes, confidence):
     conn = get_connection()
     c = conn.cursor()
     c.execute('''
         UPDATE problems
-        SET notes=?, confidence=?
+        SET pattern = ?, notes=?, confidence=?
         WHERE slug=?
-    ''', (notes, confidence, slug))
+    ''', (pattern,notes, confidence, slug))
     conn.commit()
     conn.close()
 

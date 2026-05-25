@@ -35,7 +35,7 @@ def get_recent_ac_submissions(username, limit=50):
         print("Exception while contacting LeetCode API:", e)
         return []
 
-def sync_user_problems(username, limit=50):
+def sync_user_problems(username, limit=20):
     problems = get_recent_ac_submissions(username, limit)
     if not problems:
         print("Nothing to sync (user not found or API error).")
