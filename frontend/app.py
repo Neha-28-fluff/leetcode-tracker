@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
-API_BASE = "http://localhost:8000"
+API_BASE = "https://leetcode-tracker-7as7.onrender.com"  # CHANGE THIS to your backend URL (e.g. http://localhost:8000 if running locally)
 
 st.set_page_config(
     page_title="LeetCode Tracker",
