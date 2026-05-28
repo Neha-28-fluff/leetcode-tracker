@@ -1,10 +1,5 @@
 # LeetCode Tracker
 
-[![LeetCode Tracker Webapp](https://img.shields.io/badge/Try%20it%20Live-Streamlit%20App-brightgreen)](https://leetcode-review-tracker.streamlit.app/)
-
-> **Try the app here**:  
-> 🌐 **[https://leetcode-review-tracker.streamlit.app/](https://leetcode-review-tracker.streamlit.app/)**
-
 ---
 
 ## 🚀 Features
@@ -47,8 +42,8 @@ leetcode-tracker/
 └── README.md
 ```
 
-- **Backend:** FastAPI, deployed on [Render](https://render.com)
-- **Frontend:** Streamlit, deployed on [Streamlit Community Cloud](https://streamlit.io/cloud)
+- **Backend:** FastAPI
+- **Frontend:** Streamlit
 - **Sync engine:** Uses LeetCode’s GraphQL API under the hood
 
 ---
@@ -72,27 +67,63 @@ leetcode-tracker/
 
 ---
 
+## 🏃‍♀️ Running Locally
+
+### 1. **Clone the repository**
+
+```bash
+git clone https://github.com/Neha-28-fluff/leetcode-tracker.git
+cd leetcode-tracker
+```
+
+### 2. **Set up the backend**
+
+```bash
+cd backend
+python -m venv env
+source env/bin/activate  # On Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3. **Initialize the database (SQLite, done automatically, but you may run to ensure)**
+
+```bash
+python database.py
+```
+
+### 4. **Run the FastAPI backend**
+
+```bash
+uvicorn main:app --reload
+```
+Backend will be at `http://127.0.0.1:8000`
+
+---
+
+### 5. **Set up and run the frontend**
+
+(Open a new terminal if your backend is running)
+
+```bash
+cd ../frontend
+python -m venv env
+source env/bin/activate  # On Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+Frontend will be at the URL shown in your terminal (typically `http://localhost:8501`).
+
+---
+
 ## 📝 My Learnings & Journey
 
 This project was a fantastic learning experience in **full-stack development, integration with web APIs, and cloud deployment**. My key learnings:
 
-- 🟦 **FastAPI + Cloud:** Built and deployed a secure backend API on Render, handling authentication, CORS, and clean API design.
+- 🟦 **FastAPI:** Built a secure backend API, handling authentication, CORS, and clean API design.
 - 🟩 **Streamlit for UI:** Leveraged Streamlit for a responsive Python-based frontend, including session state, editing in tables, and dynamic filtering.
 - 🟨 **LeetCode GraphQL:** Learned to use the (unofficial) LeetCode GraphQL API for fetching problem data, and robust error handling for public API quirks.
-- 🟧 **Integration:** Making sure frontend and backend work together—across `localhost` and then “live” on two platforms—was a rewarding debugging + deployment challenge.
-- 🟪 **Database design:** Extended SQLite to support multi-user data and real-world persistence in the cloud, plus safely storing user notes and ratings.
-- 🟫 **DevOps:** Covered everything from environment variables to troubleshooting deployment errors (like database folder creation and port binding).
-
-> **Biggest challenge:** Adapting to LeetCode’s API rate/data limits, and ensuring a smooth user experience
-> despite those constraints.
-
-> **Most fun:** Seeing my LeetCode history, notes, and confidence levels all in one connected, cloud-accessible dashboard!
-
----
-
-## 🌐 Web App
-
-👉 **Try it live:** [https://leetcode-review-tracker.streamlit.app/](https://leetcode-review-tracker.streamlit.app/)
+- 🟧 **Integration:** Making sure frontend and backend work together—across `localhost`—was a rewarding debugging + deployment challenge.
+- 🟪 **Database design:** Built multi-user support and persistence with SQLite, safely storing user notes and ratings.
 
 ---
 
