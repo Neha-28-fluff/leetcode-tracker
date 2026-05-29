@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
-API_BASE = "http://127.0.0.1:8000/"
+API_BASE = "http://127.0.0.1:8000"
 
 st.set_page_config(
     page_title="LeetCode Tracker",
@@ -275,7 +275,8 @@ def auth_page():
                 if not new_u or not new_p:
                     st.warning("Fill in both fields.")
                 else:
-                    r = requests.post(f"{API_BASE}/register", params={"username": new_u, "password": new_p})
+                    # Change: POST JSON rather than params.
+                    r = requests.post(f"{API_BASE}/register", json={"username": new_u, "password": new_p})
                     if r.status_code == 200:
                         st.success("Account created — sign in above.")
                     else:

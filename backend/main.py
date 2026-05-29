@@ -23,7 +23,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Restrict in production!
+    allow_origins=["*"],  # For localhost dev
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -44,6 +44,10 @@ class UpdateRequest(BaseModel):
     pattern: Optional[str] = ""
     notes: Optional[str] = ""
     confidence: Optional[int] = 0
+
+class RegisterRequest(BaseModel):
+    username: str
+    password: str
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
@@ -71,8 +75,8 @@ def startup_event():
     initialize_db()
 
 @app.post("/register")
-def register(username: str, password: str):
-    success, msg = register_user(username, password)
+def register(req: RegisterRequest):
+    success, msg = register_user(req.username, req.password)
     if not success:
         raise HTTPException(status_code=400, detail=msg)
     return {"msg": msg}
@@ -89,7 +93,6 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 @app.post("/sync")
 def sync(sync_req: SyncRequest, username: str = Depends(get_current_username)):
-    # Here, local user can sync by giving their LeetCode username. For real app, store both separately.
     sync_user_problems(username, sync_req.leetcode_username, sync_req.limit)
     return {"message": f"Synced recent problems for username={username} from LeetCode={sync_req.leetcode_username}."}
 
